@@ -55,6 +55,7 @@ class MyClient(discord.Client):
         elif message.content == 'raise-exception':
             self.channel = message.channel
             raise discord.DiscordException
+        
 
     async def on_error(self, event, *args, **kwargs):
         await self.channel.send(f'Unhandled message: {args[0]}\n')
