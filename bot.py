@@ -26,4 +26,7 @@ async def nine_nine(ctx):
     response = random.choice(brooklyn_99_quotes)
     await ctx.send(response)
 
-bot.run(TOKEN)
+intents = discord.Intents.all()
+intents.message_content = True
+
+bot.run(TOKEN, intents=intents)
