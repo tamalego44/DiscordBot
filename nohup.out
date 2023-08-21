@@ -26,3 +26,7 @@ discord.errors.ClientException: ./ffmpeg was not found.
 [2023-08-21 19:38:31] [INFO    ] discord.player: ffmpeg process 6714 should have terminated with a return code of -9.
 [2023-08-21 19:39:49] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 1143313485837643896 (Guild ID 1042983820242190409)
 [2023-08-21 19:39:49] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
+[2023-08-21 19:42:13] [INFO    ] discord.voice_client: Connecting to voice...
+[2023-08-21 19:42:13] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
+[2023-08-21 19:42:13] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found atlanta4854.discord.media
+[mp3 @ 0xe72930] Estimating duration from bitrate, this may be inaccurate
