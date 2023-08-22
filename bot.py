@@ -10,6 +10,7 @@ import traceback
 import hashlib
 from gtts import gTTS
 import os   
+from youtube import YTDLSource
 
 # import DiscordBot.WIP.cod as cod
 # from DiscordBot.WIP.db import CSVDB
@@ -94,49 +95,51 @@ async def leave(ctx):
     else:
         await ctx.send("The bot is not connected to a voice channel.")
 
-valid_filetypes = ["mp3", "mp4"]
+valid_filetypes = ["mp3"]
 @bot.command(name='play', help="This command plays a file")
 async def play(ctx, url = None):
-    # voice_client = ctx.message.guild.voice_client
-    # if not voice_client.is_connected():
-    #     channel = ctx.message.author.voice.channel
-    #     await channel.connect()
-
-    await join(ctx)
-    
-    if ctx.message.attachments:
-        for file in ctx.message.attachments:
-            if file.filename.split(".")[-1] in valid_filetypes:
-                filename = download(''.join(file.url), file.filename, str(ctx.message.channel))
-
-                try:
-                    server = ctx.message.guild
-                    voice_channel = server.voice_client
+    try:
+        await join(ctx)
+        server = ctx.message.guild
+        voice_channel = server.voice_client
+        if ctx.message.attachments:
+            for file in ctx.message.attachments:
+                if file.filename.split(".")[-1] in valid_filetypes:
                     async with ctx.typing():
+                        filename = download(''.join(file.url), file.filename, str(ctx.message.channel))
                         voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename))
                     await ctx.send('**Now playing:** {}'.format(file.filename))
-                except Exception as e:
-                    traceback.print_exc()
-                    await ctx.send("The bot is not connected to a voice channel.")
-            else:
-                await ctx.send("%s is not of a supported filetype. Supported filetypes: %s" % (file.filename, valid_filetypes))
-    else:
-        ## Check if its a link
-        #if url =
-        pass 
+                else:
+                    await ctx.send("%s is not of a supported filetype. Supported filetypes: %s" % (file.filename, valid_filetypes))
+        elif url:
+            #TODO: Only allow youtube links
+            print(url)
+            async with ctx.typing():
+                player = await YTDLSource.from_url(url, loop=bot.loop)
+                voice_channel.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+            await ctx.send('**Now playing:** {}'.format(player.title))
+        else:
+            await ctx.send("Play... what? Send a file or a link.")
+    except Exception as e:
+        print(e)
+        await ctx.send("Something went wrong. Notify <@186322107783839746>")
 
-    # else:
-    #     try :
-    #         server = ctx.message.guild
-    #         voice_channel = server.voice_client
-    #         async with ctx.typing():
-    #             filename = await YTDLSource.from_url(url, loop=bot.loop)
-    #             voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=filename))
-    #         await ctx.send('**Now playing:** {}'.format(filename))
-    #     except:
-    #         await ctx.send("The bot is not connected to a voice channel.")
 
-# async def sayWords(ctx, text):
+# @bot.command(name="play")
+# async def play(ctx, *, url):
+#     print(url)
+#     server = ctx.message.guild
+#     voice_channel = server.voice_client
+
+#     try:
+#         async with ctx.typing():
+#             player = await YTDLSource.from_url(url, loop=bot.loop)
+#             ctx.voice_channel.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+#         await ctx.send('Now playing: {}'.format(player.title))
+#     except Exception as e:
+#         print(e)
+#         print(e.with_traceback())
+
 
 
 
