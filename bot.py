@@ -94,7 +94,7 @@ async def join(ctx: commands.Context):
         await ctx.send("Connected to {}'s voice channel".format(ctx.message.author.name))
 
 @bot.command(name='leave', help='To make the bot leave the voice channel')
-async def leave(ctx):
+async def leave(ctx: commands.Context):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_connected():
         await voice_client.disconnect()
@@ -141,7 +141,7 @@ async def play(ctx, url: str = None):
 
 voice_filename = 'temp.mp3'
 @bot.command(name='say', help='Habiba will say a command')
-async def say(ctx, *text: str):
+async def say(ctx: commands.Context, *text: str):
     if text:
         
         path = fileDirectory + str(ctx.message.guild)
@@ -169,7 +169,7 @@ async def say(ctx, *text: str):
             server = ctx.message.guild
             voice_channel = server.voice_client
             #async with ctx.typing():
-            voice_channel.play(discord.FFmpegPCMAudio(executable="./ffmpeg", source=filepath))
+            voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filepath))
         except Exception as e:
             traceback.print_exc()
             await ctx.send("The bot is not connected to a voice channel.")
@@ -177,24 +177,24 @@ async def say(ctx, *text: str):
         #engine.stop()
 
 
-@bot.command(name='pause', help='This command pauses the song')
-async def pause(ctx):
+@bot.command(name='pause', help='This command pauses the current song. Resume playing with !resume')
+async def pause(ctx: commands.Context):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
         await voice_client.pause()
     else:
         await ctx.send("The bot is not playing anything at the moment.")
     
-@bot.command(name='resume', help='Resumes the song')
-async def resume(ctx):
+@bot.command(name='resume', help='Resumes the song that was paused with !pause')
+async def resume(ctx: commands.Context):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_paused():
         await voice_client.resume()
     else:
-        await ctx.send("The bot was not playing anything before this. Use play command")
+        await ctx.send("The bot was not playing anything before this. Use !play command")
 
 @bot.command(name='stop', help='Stops the song')
-async def stop(ctx):
+async def stop(ctx: commands.Context):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
         await voice_client.stop()

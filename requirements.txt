@@ -2,3 +2,4 @@ discord
 python-dotenv
 pynacl
 youtube-dl
+soundcloud-lib
