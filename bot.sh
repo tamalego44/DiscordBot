@@ -1,5 +1,5 @@
 if [ -z $1 ]; then
-    echo "Help"
+    echo "Run, Restart, Kill"
 
 elif [ $1 == "run" ]; then
     nohup python bot.py &
@@ -12,5 +12,5 @@ elif [ $1 == "restart" ]; then
     nohup python bot.py &
 
 else
-    echo "Help"
+    echo "Run, Restart, Kill"
 fi
