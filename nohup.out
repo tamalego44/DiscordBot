@@ -96,3 +96,27 @@ https://m.youtube.com/watch?v=lQlIhraqL7o&pp=ygUUaSBqdXN0IGhhZCBzZXggc29uZyA%3D
 [2023-08-23 15:31:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
 [2023-08-23 18:05:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
 [2023-08-23 19:59:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
+[2023-08-23 22:30:19] [INFO    ] discord.client: logging in using static token
+[2023-08-23 22:30:20] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e2c89ae716fe94ae37493a8f68ec1bed).
+[2023-08-23 22:30:57] [INFO    ] discord.voice_client: Connecting to voice...
+[2023-08-23 22:30:57] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
+[2023-08-23 22:30:57] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found us-east9870.discord.media
+[2023-08-23 22:31:12] [INFO    ] discord.voice_client: Connecting to voice...
+[2023-08-23 22:31:12] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
+[2023-08-23 22:31:12] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found us-east4730.discord.media
+[2023-08-23 22:32:04] [INFO    ] discord.player: ffmpeg process 6431 has not terminated. Waiting to terminate...
+[2023-08-23 22:32:04] [INFO    ] discord.player: ffmpeg process 6431 should have terminated with a return code of -9.
+[2023-08-23 22:32:11] [INFO    ] discord.player: ffmpeg process 6437 has not terminated. Waiting to terminate...
+[2023-08-23 22:32:11] [INFO    ] discord.player: ffmpeg process 6437 should have terminated with a return code of -9.
+[2023-08-23 22:32:37] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 639621895926579215 (Guild ID 639621895926579211)
+[2023-08-23 22:32:37] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
+[2023-08-23 22:33:33] [ERROR   ] discord.player: Calling the after function failed.
+Traceback (most recent call last):
+  File "/home/jamespur/.local/lib/python3.9/site-packages/discord/player.py", line 712, in _call_after
+    self.after(error)
+  File "/home/jamespur/development/DiscordBot/bot.py", line 70, in <lambda>
+    server.voice_client.play(source, after=lambda x=0: check_queue(ctx))
+  File "/home/jamespur/development/DiscordBot/bot.py", line 75, in check_queue
+    if len(queues[server.id]):
+KeyError: 1042983820242190409
+[2023-08-23 22:33:33] [INFO    ] discord.player: ffmpeg process 6419 successfully terminated with return code of 0.
