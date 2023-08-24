@@ -1,122 +1,0 @@
-[2023-08-21 19:33:02] [INFO    ] discord.client: logging in using static token
-[2023-08-21 19:33:03] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 99891cefd08e8a2dbc92ea873c590501).
-[2023-08-21 19:33:40] [INFO    ] discord.client: logging in using static token
-[2023-08-21 19:33:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: acabd24038431e4d45db640614f9e3af).
-[2023-08-21 19:35:05] [INFO    ] discord.client: logging in using static token
-[2023-08-21 19:35:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7a24afe493bdb1b6ed3f97ed4fecab0e).
-[2023-08-21 19:35:19] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-21 19:35:19] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-21 19:35:19] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found atlanta5387.discord.media
-[2023-08-21 19:35:22] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 1143313485837643896 (Guild ID 1042983820242190409)
-[2023-08-21 19:35:22] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
-[2023-08-21 19:35:36] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-21 19:35:36] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-21 19:35:36] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found atlanta5387.discord.media
-Traceback (most recent call last):
-  File "/home/jamespur/development/DiscordBot/bot.py", line 173, in say
-    voice_channel.play(discord.FFmpegPCMAudio(executable="./ffmpeg", source=filepath))
-  File "/home/jamespur/.local/lib/python3.9/site-packages/discord/player.py", line 290, in __init__
-    super().__init__(source, executable=executable, args=args, **subprocess_kwargs)
-  File "/home/jamespur/.local/lib/python3.9/site-packages/discord/player.py", line 166, in __init__
-    self._process = self._spawn_process(args, **kwargs)
-  File "/home/jamespur/.local/lib/python3.9/site-packages/discord/player.py", line 183, in _spawn_process
-    raise ClientException(executable + ' was not found.') from None
-discord.errors.ClientException: ./ffmpeg was not found.
-[2023-08-21 19:38:31] [INFO    ] discord.player: ffmpeg process 6714 has not terminated. Waiting to terminate...
-[2023-08-21 19:38:31] [INFO    ] discord.player: ffmpeg process 6714 should have terminated with a return code of -9.
-[2023-08-21 19:39:49] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 1143313485837643896 (Guild ID 1042983820242190409)
-[2023-08-21 19:39:49] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
-[2023-08-21 19:42:13] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-21 19:42:13] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-21 19:42:13] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found atlanta4854.discord.media
-[mp3 @ 0xe72930] Estimating duration from bitrate, this may be inaccurate
-[2023-08-21 19:43:17] [INFO    ] discord.player: ffmpeg process 6887 has not terminated. Waiting to terminate...
-[2023-08-21 19:43:17] [INFO    ] discord.player: ffmpeg process 6887 should have terminated with a return code of -9.
-[2023-08-21 19:55:23] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 713601645014941706 (Guild ID 639621895926579211)
-[2023-08-21 19:55:23] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
-[2023-08-21 23:12:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 00:03:04] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 01:04:03] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 04:40:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 05:46:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 08:23:24] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 08:47:01] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 09:57:09] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 10:18:21] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 11:37:11] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 13:17:33] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 13:37:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 13:58:37] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 7a24afe493bdb1b6ed3f97ed4fecab0e.
-[2023-08-22 16:36:46] [INFO    ] discord.client: logging in using static token
-[2023-08-22 16:36:47] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c7051caf126e286c83657ca7785b5cbd).
-[2023-08-22 16:37:27] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-22 16:37:27] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-22 16:37:27] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found atlanta7610.discord.media
-[download] 100% of    3.79MiBhttps://www.youtube.com/watch?v=sDOxeU02NUM
-                             [2023-08-22 16:37:38] [INFO    ] discord.player: ffmpeg process 17832 has not terminated. Waiting to terminate...
-[2023-08-22 16:37:38] [INFO    ] discord.player: ffmpeg process 17832 should have terminated with a return code of -9.
-[2023-08-22 17:22:52] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-22 17:22:52] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-22 17:22:52] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found us-east3077.discord.media
-[download]   0.0% of    3.80MiB at  325.32KiB/s ETA 00:12https://www.youtube.com/watch?v=0IKcfGZgZYc
-[download]   0.1% of    3.80MiB at  672.42KiB/s ETA 00:05[download]   0.2% of    3.80MiB at    1.23MiB/s ETA 00:03[download]   0.4% of    3.80MiB at    2.17MiB/s ETA 00:01[download]   0.8% of    3.80MiB at    1.82MiB/s ETA 00:02[download]   1.6% of    3.80MiB at    1.72MiB/s ETA 00:02[download]   3.3% of    3.80MiB at    2.39MiB/s ETA 00:01[download]   6.6% of    3.80MiB at    3.33MiB/s ETA 00:01[download]  13.1% of    3.80MiB at    4.94MiB/s ETA 00:00[download]  26.3% of    3.80MiB at    8.20MiB/s ETA 00:00[download]  52.7% of    3.80MiB at   12.96MiB/s ETA 00:00[download] 100.0% of    3.80MiB at   18.71MiB/s ETA 00:00[download] 100% of    3.80MiB in 00:00:00 at 9.97MiB/s                                                         [2023-08-22 17:26:29] [INFO    ] discord.player: ffmpeg process 18397 successfully terminated with return code of 0.
-[download]   0.0% of    2.61MiB at  541.90KiB/s ETA 00:05https://m.youtube.com/watch?v=Rt0spqQtMKg&pp=ygUNZGljayBpbiBhIGJveA%3D%3D
-[download]   0.1% of    2.61MiB at  908.78KiB/s ETA 00:02[download]   0.3% of    2.61MiB at    1.57MiB/s ETA 00:01[download]   0.6% of    2.61MiB at    2.66MiB/s ETA 00:00[download]   1.2% of    2.61MiB at    3.56MiB/s ETA 00:00[download]   2.4% of    2.61MiB at    2.95MiB/s ETA 00:00[download]   4.8% of    2.61MiB at    4.07MiB/s ETA 00:00[download]   9.6% of    2.61MiB at    5.01MiB/s ETA 00:00[download]  19.1% of    2.61MiB at    6.60MiB/s ETA 00:00[download]  38.3% of    2.61MiB at    7.81MiB/s ETA 00:00[download]  76.7% of    2.61MiB at   10.31MiB/s ETA 00:00[download] 100.0% of    2.61MiB at    9.37MiB/s ETA 00:00[download] 100% of    2.61MiB in 00:00:00 at 5.04MiB/s                                                         [download]   0.0% of    3.34MiB at  148.11KiB/s ETA 00:23https://www.youtube.com/watch?v=c5ZgMUyQL4s
-[download]   0.1% of    3.34MiB at  362.32KiB/s ETA 00:09[download]   0.2% of    3.34MiB at  678.33KiB/s ETA 00:05[download]   0.4% of    3.34MiB at    1.15MiB/s ETA 00:02[download]   0.9% of    3.34MiB at    1.04MiB/s ETA 00:03[download]   1.8% of    3.34MiB at    1.36MiB/s ETA 00:02[download]   3.7% of    3.34MiB at    1.80MiB/s ETA 00:01[download]   7.4% of    3.34MiB at    2.60MiB/s ETA 00:01[download]  14.9% of    3.34MiB at    4.07MiB/s ETA 00:00[download]  29.9% of    3.34MiB at    6.28MiB/s ETA 00:00[download]  59.8% of    3.34MiB at    9.96MiB/s ETA 00:00[download] 100.0% of    3.34MiB at   13.96MiB/s ETA 00:00[download] 100% of    3.34MiB in 00:00:00 at 7.75MiB/s                                                         [2023-08-22 17:28:05] [INFO    ] discord.player: ffmpeg process 18453 has not terminated. Waiting to terminate...
-[2023-08-22 17:28:05] [INFO    ] discord.player: ffmpeg process 18453 should have terminated with a return code of -9.
-[2023-08-22 17:28:54] [INFO    ] discord.player: ffmpeg process 18439 has not terminated. Waiting to terminate...
-[2023-08-22 17:28:54] [INFO    ] discord.player: ffmpeg process 18439 should have terminated with a return code of -9.
-[download]   0.0% of    2.65MiB at  610.17KiB/s ETA 00:04Already playing audio.
-https://m.youtube.com/watch?v=lQlIhraqL7o&pp=ygUUaSBqdXN0IGhhZCBzZXggc29uZyA%3D
-[download]   0.1% of    2.65MiB at  996.35KiB/s ETA 00:02[download]   0.3% of    2.65MiB at    1.68MiB/s ETA 00:01[download]   0.6% of    2.65MiB at    2.78MiB/s ETA 00:00[download]   1.1% of    2.65MiB at    3.29MiB/s ETA 00:00[download]   2.3% of    2.65MiB at    3.71MiB/s ETA 00:00[download]   4.7% of    2.65MiB at    4.60MiB/s ETA 00:00[download]   9.4% of    2.65MiB at    5.62MiB/s ETA 00:00[download]  18.8% of    2.65MiB at    7.60MiB/s ETA 00:00[download]  37.7% of    2.65MiB at   10.35MiB/s ETA 00:00[download]  75.5% of    2.65MiB at   15.65MiB/s ETA 00:00[download] 100.0% of    2.65MiB at   17.90MiB/s ETA 00:00[download] 100% of    2.65MiB in 00:00:00 at 10.64MiB/s                                                         [2023-08-22 17:31:51] [INFO    ] discord.player: ffmpeg process 18461 successfully terminated with return code of 0.
-[download] 100% of    3.34MiBhttps://www.youtube.com/watch?v=c5ZgMUyQL4s
-                             [2023-08-22 17:35:08] [INFO    ] discord.player: ffmpeg process 18493 successfully terminated with return code of 0.
-[download]   0.0% of    3.96MiB at  492.35KiB/s ETA 00:08https://www.youtube.com/watch?v=NJTvniEcpaI
-[download]   0.1% of    3.96MiB at  894.44KiB/s ETA 00:04[download]   0.2% of    3.96MiB at    1.55MiB/s ETA 00:02[download]   0.4% of    3.96MiB at    2.63MiB/s ETA 00:01[download]   0.8% of    3.96MiB at    2.09MiB/s ETA 00:01[download]   1.6% of    3.96MiB at    3.01MiB/s ETA 00:01[download]   3.1% of    3.96MiB at    3.89MiB/s ETA 00:00[download]   6.3% of    3.96MiB at    4.70MiB/s ETA 00:00[download]  12.6% of    3.96MiB at    6.82MiB/s ETA 00:00[download]  25.2% of    3.96MiB at    9.97MiB/s ETA 00:00[download]  50.5% of    3.96MiB at    7.65MiB/s ETA 00:00[download] 100.0% of    3.96MiB at   10.13MiB/s ETA 00:00[download] 100% of    3.96MiB in 00:00:00 at 6.94MiB/s                                                         [2023-08-22 17:40:12] [INFO    ] discord.player: ffmpeg process 18540 successfully terminated with return code of 0.
-[download] 100% of    3.96MiBhttps://www.youtube.com/watch?v=NJTvniEcpaI
-                             [2023-08-22 17:48:12] [INFO    ] discord.player: ffmpeg process 18666 successfully terminated with return code of 0.
-[2023-08-22 17:53:50] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 713601645014941706 (Guild ID 639621895926579211)
-[2023-08-22 17:53:50] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
-[2023-08-22 19:07:37] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 1042983820921679895 (Guild ID 1042983820242190409)
-[2023-08-22 19:07:37] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
-[2023-08-22 20:22:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-22 20:58:25] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-22 23:19:16] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-22 23:23:23] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 01:13:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 01:27:39] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 04:34:38] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 05:25:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 06:10:13] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 08:02:43] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 08:58:57] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 10:21:58] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 12:24:32] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 15:13:12] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 15:31:14] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 18:05:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 19:59:40] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session c7051caf126e286c83657ca7785b5cbd.
-[2023-08-23 22:30:19] [INFO    ] discord.client: logging in using static token
-[2023-08-23 22:30:20] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e2c89ae716fe94ae37493a8f68ec1bed).
-[2023-08-23 22:30:57] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-23 22:30:57] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-23 22:30:57] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found us-east9870.discord.media
-[2023-08-23 22:31:12] [INFO    ] discord.voice_client: Connecting to voice...
-[2023-08-23 22:31:12] [INFO    ] discord.voice_client: Starting voice handshake... (connection attempt 1)
-[2023-08-23 22:31:12] [INFO    ] discord.voice_client: Voice handshake complete. Endpoint found us-east4730.discord.media
-[2023-08-23 22:32:04] [INFO    ] discord.player: ffmpeg process 6431 has not terminated. Waiting to terminate...
-[2023-08-23 22:32:04] [INFO    ] discord.player: ffmpeg process 6431 should have terminated with a return code of -9.
-[2023-08-23 22:32:11] [INFO    ] discord.player: ffmpeg process 6437 has not terminated. Waiting to terminate...
-[2023-08-23 22:32:11] [INFO    ] discord.player: ffmpeg process 6437 should have terminated with a return code of -9.
-[2023-08-23 22:32:37] [INFO    ] discord.voice_client: The voice handshake is being terminated for Channel ID 639621895926579215 (Guild ID 639621895926579211)
-[2023-08-23 22:32:37] [INFO    ] discord.voice_client: Disconnecting from voice normally, close code 1000.
-[2023-08-23 22:33:33] [ERROR   ] discord.player: Calling the after function failed.
-Traceback (most recent call last):
-  File "/home/jamespur/.local/lib/python3.9/site-packages/discord/player.py", line 712, in _call_after
-    self.after(error)
-  File "/home/jamespur/development/DiscordBot/bot.py", line 70, in <lambda>
-    server.voice_client.play(source, after=lambda x=0: check_queue(ctx))
-  File "/home/jamespur/development/DiscordBot/bot.py", line 75, in check_queue
-    if len(queues[server.id]):
-KeyError: 1042983820242190409
-[2023-08-23 22:33:33] [INFO    ] discord.player: ffmpeg process 6419 successfully terminated with return code of 0.
