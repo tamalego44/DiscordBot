@@ -18,7 +18,7 @@ import traceback
 # from DiscordBot.WIP.db import CSVDB
 # db = CSVDB()
 
-client_id = 1042601465526624276
+client_id = os.getenv('DISCORD_CLIENT_ID')
 endpoint = 'https://discord.com/api/oauth2/authorize?client_id=1042601465526624276&permissions=8&scope=bot'
 fileDirectory = './temp/'
 
