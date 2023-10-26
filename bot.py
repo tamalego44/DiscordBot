@@ -62,7 +62,7 @@ async def playsong(ctx: commands.Context, source, name, filename):
     server = ctx.message.guild
     voice_channel = server.voice_client
 
-    db.insert(str(server.id), filename)
+    db.insert(str(server.id), filename, name, ctx.author.id)
 
     if voice_channel.is_playing():
         if server.id not in queues:
