@@ -13,13 +13,13 @@ from youtube import YTDLSource
 from sclib import SoundcloudAPI, Track
 from discord.ext import commands
 import traceback
-
+import db
 # import DiscordBot.WIP.cod as cod
 # from DiscordBot.WIP.db import CSVDB
 # db = CSVDB()
 
 client_id = os.getenv('DISCORD_CLIENT_ID')
-endpoint = 'https://discord.com/api/oauth2/authorize?client_id=1042601465526624276&permissions=8&scope=bot'
+endpoint = f'https://discord.com/api/oauth2/authorize?client_id={client_id}&permissions=8&scope=bot'
 fileDirectory = './temp/'
 
 # bot.py
@@ -58,9 +58,12 @@ def download(fileUrl, filename, channel):
     return path + '/' + hash
 
 queues = {}
-async def playsong(ctx: commands.Context, source, name):
+async def playsong(ctx: commands.Context, source, name, filename):
     server = ctx.message.guild
     voice_channel = server.voice_client
+
+    db.insert(str(server.id), filename)
+
     if voice_channel.is_playing():
         if server.id not in queues:
             queues[server.id] = []
@@ -72,10 +75,13 @@ async def playsong(ctx: commands.Context, source, name):
 
 def check_queue(ctx: commands.Context):
     server = ctx.message.guild
-    if len(queues[server.id]):
+    if server.id in queues and len(queues[server.id]):
         source, name = queues[server.id].pop(0)
         server.voice_client.play(source, after=lambda x=0: check_queue(ctx))
         #await ctx.send('**Now playing:** {}'.format(name)) TODO: Fix this
+    else:
+        voice_client = ctx.message.guild.voice_client
+        voice_client.stop()
 
 
 
@@ -111,7 +117,7 @@ async def play(ctx, url: str = None):
                 if file.filename.split(".")[-1] in valid_filetypes:
                     async with ctx.typing():
                         filename = download(''.join(file.url), file.filename, str(ctx.message.channel))
-                        await playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), file.filename.split(".")[0])
+                        await playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), file.filename.split(".")[0], filename)
                 else:
                     await ctx.send("%s is not of a supported filetype. Supported filetypes: %s" % (file.filename, valid_filetypes))
         elif url and url.startswith("https://soundcloud.com"):
@@ -125,13 +131,13 @@ async def play(ctx, url: str = None):
                 if not os.path.exists(filename):
                     with open(filename, 'wb+') as file:
                         track.write_mp3_to(file)
-                await playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), f"{track.artist} - {track.title}")
+                await playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), f"{track.artist} - {track.title}", filename)
         elif url:
             #TODO: Only allow youtube links
             print(url)
             async with ctx.typing():
                 player = await YTDLSource.from_url(url, loop=bot.loop)
-                await playsong(ctx, player, f'{player.title}')
+                await playsong(ctx, player, f'{player.title}', player.filename)
         else:
             await ctx.send("Play... what? Send a file or a link.")
     except Exception:
@@ -200,5 +206,21 @@ async def stop(ctx: commands.Context):
         await voice_client.stop()
     else:
         await ctx.send("The bot is not playing anything at the moment.")
+
+@bot.command(name='loop', help='Toggle looping for the current song')
+async def loop(ctx: commands.Context):
+    await ctx.send("this function is not yet supported")
+
+valid_filetypes = ["mp3"]
+@bot.command(name='replay', help="Replay a previous song")
+async def play(ctx, index: int = -1):
+    try:
+        await join(ctx)
+        rec = db.get(str(ctx.message.guild.id), index)
+        await playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=rec[1]), "TEMP VALUE", rec[1])
+    except Exception:
+        print(traceback.format_exc())
+        await ctx.send("Something went wrong. Notify <@186322107783839746>")
+
 
 bot.run(TOKEN)

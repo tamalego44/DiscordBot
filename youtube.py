@@ -27,13 +27,14 @@ ffmpeg_options = {
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
 class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
+    def __init__(self, source, *, data, filename, volume=0.5):
         super().__init__(source, volume)
 
         self.data = data
 
         self.title = data.get('title')
         self.url = data.get('url')
+        self.filename = filename
 
     @classmethod
     async def from_url(cls, url, *, loop=None, stream=False):
@@ -45,5 +46,5 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data['entries'][0]
 
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return cls(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename, **ffmpeg_options), data=data)
+        return cls(discord.FFmpegPCMAudio(executable="ffmpeg", source=filename, **ffmpeg_options), data=data, filename=filename)
     
