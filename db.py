@@ -1,6 +1,7 @@
 import sqlite3
 import time
 import os
+from util import Song
 
 #TODO: Encapsulate
 db_path = "habiba2.db"
@@ -10,10 +11,10 @@ def createDB():
     cur = con.cursor()
     cur.execute("CREATE TABLE IF NOT EXISTS history(server, filename, time, name, uploader)")
 
-def insert(server, filename, name, uploader):
+def insert(server, song_obj: Song):
     t = time.time()
     cur = con.cursor()
-    data = (server, filename, t, name, uploader)
+    data = (server, song_obj.filename, t, song_obj.name, song_obj.uploader.id)
     cur.execute("INSERT INTO history VALUES(?, ?, ?, ?, ?)", data)
     con.commit()
 

@@ -8,12 +8,13 @@ import os
 import traceback
 import hashlib
 from gtts import gTTS
-import os   
-from youtube import YTDLSource
+import os
 from sclib import SoundcloudAPI, Track
 from discord.ext import commands
 import traceback
 import db
+from util import Song, YTDLSource
+
 # import DiscordBot.WIP.cod as cod
 # from DiscordBot.WIP.db import CSVDB
 # db = CSVDB()
@@ -62,12 +63,14 @@ async def playsong(ctx: commands.Context, source, name, filename):
     server = ctx.message.guild
     voice_channel = server.voice_client
 
-    db.insert(str(server.id), filename, name, ctx.author.id)
+    song_obj = Song(ctx, source, name, filename)
+
+    db.insert(str(server.id), song_obj)
 
     if voice_channel.is_playing():
         if server.id not in queues:
             queues[server.id] = []
-        queues[server.id].append((source, name))
+        queues[server.id].append(song_obj)
         await ctx.send(f'Added {name}. \n **{len(queues[server.id])}** in queue.')
     else:
         server.voice_client.play(source, after=lambda x=0: check_queue(ctx))
@@ -76,14 +79,22 @@ async def playsong(ctx: commands.Context, source, name, filename):
 def check_queue(ctx: commands.Context):
     server = ctx.message.guild
     if server.id in queues and len(queues[server.id]):
-        source, name = queues[server.id].pop(0)
-        server.voice_client.play(source, after=lambda x=0: check_queue(ctx))
+        song_obj = queues[server.id].pop(0)
+        server.voice_client.play(song_obj.source, after=lambda x=0: check_queue(ctx))
         #await ctx.send('**Now playing:** {}'.format(name)) TODO: Fix this
     else:
         voice_client = ctx.message.guild.voice_client
         voice_client.stop()
 
+@bot.command(name='queue', help='Display the current queue')
+async def queue(ctx: commands.Context):
+    server = ctx.message.guild
+    queue = queues[server.id]
+    ret = ""
+    for i, song_obj in enumerate(queue):
+        ret += "%d: %s" % (i, song_obj.name)
 
+    await ctx.send(ret)
 
 @bot.command(name='join', help='Tells the bot to join the voice channel')
 async def join(ctx: commands.Context):
@@ -144,45 +155,6 @@ async def play(ctx, url: str = None):
         print(traceback.format_exc())
         await ctx.send("Something went wrong. Notify <@186322107783839746>")
 
-
-voice_filename = 'temp.mp3'
-@bot.command(name='say', help='Habiba will say a command')
-async def say(ctx: commands.Context, *text: str):
-    if text:
-        
-        path = fileDirectory + str(ctx.message.guild)
-        tts = gTTS(text=' '.join(text), lang='en')#, tld='com.au')
-        tts.save(voice_filename)
-
-        BLOCKSIZE = 65536
-        hasher = hashlib.sha256()
-        with open(voice_filename, 'rb') as f:
-            while True:
-                data = f.read(BLOCKSIZE)
-                if not data:
-                    break
-                hasher.update(data)
-        hash = hasher.hexdigest()
-
-        filepath = path + '/' + hash
-
-        if not os.path.exists(path):
-            os.makedirs(path)
-       
-        os.replace(voice_filename, filepath)
-
-        try:
-            server = ctx.message.guild
-            voice_channel = server.voice_client
-            #async with ctx.typing():
-            voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=filepath))
-        except Exception as e:
-            traceback.print_exc()
-            await ctx.send("The bot is not connected to a voice channel.")
-        
-        #engine.stop()
-
-
 @bot.command(name='pause', help='This command pauses the current song. Resume playing with !resume')
 async def pause(ctx: commands.Context):
     voice_client = ctx.message.guild.voice_client
@@ -199,13 +171,19 @@ async def resume(ctx: commands.Context):
     else:
         await ctx.send("The bot was not playing anything before this. Use !play command")
 
-@bot.command(name='stop', help='Stops the song')
-async def stop(ctx: commands.Context):
+@bot.command(name='skip', help='Skips the current song')
+async def skip(ctx: commands.Context):
     voice_client = ctx.message.guild.voice_client
     if voice_client.is_playing():
         await voice_client.stop()
     else:
         await ctx.send("The bot is not playing anything at the moment.")
+
+@bot.command(name='stop', help='stops playing and empties queue')
+async def stop(ctx: commands.Context):
+    server = ctx.message.guild
+    queues[server.id] = []
+    await skip(ctx)
 
 @bot.command(name='loop', help='Toggle looping for the current song')
 async def loop(ctx: commands.Context):
