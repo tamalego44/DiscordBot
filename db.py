@@ -4,7 +4,7 @@ import os
 from util import Song
 
 #TODO: Encapsulate
-db_path = "habiba2.db"
+db_path = "habiba.db"
 con = sqlite3.connect(db_path)
 
 def createDB():
