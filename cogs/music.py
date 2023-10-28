@@ -1,3 +1,4 @@
+import asyncio
 import os
 import traceback
 import discord
@@ -11,6 +12,7 @@ class MusicCog(commands.Cog):
         self.client = client
         self.queues = {}
         self.valid_filetypes = ["mp3"]
+        self.timeout = 600
     
     @commands.command(name="pause", help="This command pauses the current song. Resume playing with !resume")
     async def pause(self, ctx: commands.Context):
@@ -114,7 +116,7 @@ class MusicCog(commands.Cog):
                             filename = download(''.join(file.url), file.filename, str(ctx.message.channel))
                             await self.playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=filename), file.filename.split(".")[0], filename)
                     else:
-                        await ctx.send("%s is not of a supported filetype. Supported filetypes: %s" % (file.filename, valid_filetypes))
+                        await ctx.send("%s is not of a supported filetype. Supported filetypes: %s" % (file.filename, self.valid_filetypes))
             elif url and url.startswith("https://soundcloud.com"):
                 #Soundcloud Player
                 print(url)
@@ -155,6 +157,25 @@ class MusicCog(commands.Cog):
         else:
             server.voice_client.play(source, after=lambda x=0: self.check_queue(ctx))
             await ctx.send('**Now playing:** {}'.format(name))
+
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        
+        if not member.id == self.client.user.id:
+            return
+
+        elif before.channel is None:
+            voice = after.channel.guild.voice_client
+            time = 0
+            while True:
+                await asyncio.sleep(1)
+                time = time + 1
+                if voice.is_playing() and not voice.is_paused():
+                    time = 0
+                if time == self.timeout:
+                    await voice.disconnect()
+                if not voice.is_connected():
+                    break
 
 async def setup(client):
     await client.add_cog(MusicCog(client))

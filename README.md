@@ -9,14 +9,10 @@ import yt_dlp as youtube_dl
 - Make all user feedback more uniform
 - Improve help messages
 - Add help info to bot profile
-- Add !skip or !next cmd (TESTING)
-- Add !last command (TESTING)
 - Have habiba remove herself from queue when appropriate https://stackoverflow.com/questions/63658589/how-to-make-a-discord-bot-leave-the-voice-channel-after-being-inactive-for-x-min
-- Add way for user to see queue (TESTING)
-- Habiba says whats coming next in queue
+- Refine queue output (by whom and song duration)
 - Expand valid filetypes
 - Gambling...
-- organization https://stackoverflow.com/questions/50678419/how-to-make-multiple-files-python-bot
 - Logging https://discordpy.readthedocs.io/en/latest/logging.html
 
 ## Bug List
