@@ -7,7 +7,7 @@ class Test2Commands(commands.Cog):
     
     @commands.command(name="test2")
     async def test1(self, ctx):
-        ctx.send("Test 2 Success.")
+        await ctx.send("Test 2 Success.")
     
-def setup(client):
-    client.add_cog(Test2Commands(client))
+async def setup(client):
+    await client.add_cog(Test2Commands(client))

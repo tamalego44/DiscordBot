@@ -1,15 +1,44 @@
 import asyncio
+import hashlib
+import os
 import discord
+import requests
 import yt_dlp as youtube_dl
 
+"""
+MUSIC FUNCTIONALITY FUNCTIONS
+"""
 class Song(object):
     def __init__(self, ctx, source, name, filename):
         self.source = source
         self.name = name
-        self.filename = filename,
+        self.filename = filename
         self.uploader = ctx.author
 
+fileDirectory = './temp/'
+def download(fileUrl, filename, channel):
+    path = fileDirectory + channel
+    fileDownload = requests.get(fileUrl)
 
+    BLOCKSIZE = 65536
+    hasher = hashlib.sha256()
+    # for i in range(0, fileDownload.content, BLOCKSIZE):
+    #     hasher.update(fileDownload.content[i:i+BLOCKSIZE])
+    hasher.update(fileDownload.content)
+    hash = hasher.hexdigest()
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+    if not os.path.isfile(path + '/' + hash):     
+        with open(path + '/' + hash, 'wb') as file:
+            file.write(fileDownload.content)
+            print("Downloading file: " + fileUrl)
+
+    return path + '/' + hash
+
+""""
+YOUTUBE_DL FUNCTIONS
+"""
 youtube_dl.utils.bug_reports_message = lambda: ''
 
 ytdl_format_options = {

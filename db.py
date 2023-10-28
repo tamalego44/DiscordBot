@@ -15,6 +15,8 @@ def insert(server, song_obj: Song):
     t = time.time()
     cur = con.cursor()
     data = (server, song_obj.filename, t, song_obj.name, song_obj.uploader.id)
+    print(song_obj.filename)
+    print(type(song_obj.filename))
     cur.execute("INSERT INTO history VALUES(?, ?, ?, ?, ?)", data)
     con.commit()
 

@@ -17,6 +17,7 @@ import yt_dlp as youtube_dl
 - Expand valid filetypes
 - Gambling...
 - organization https://stackoverflow.com/questions/50678419/how-to-make-multiple-files-python-bot
+- Logging https://discordpy.readthedocs.io/en/latest/logging.html
 
 ## Bug List
 - Variable Bit-Rate mp3s are not handled properly by ffmpeg

@@ -1,3 +1,4 @@
+import asyncio
 import os
 import discord
 from dotenv import load_dotenv
@@ -17,8 +18,15 @@ intents = discord.Intents.all()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-cog_files = ['commands.test1', 'commands.test2']
+async def load_extensions():
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            # cut off the .py from the file name
+            await bot.load_extension(f"cogs.{filename[:-3]}")
 
-for cog_file in cog_files:
-    bot.load_extension(cog_file)
-    print("%s has loaded" % cog_file)
+async def main():
+    async with bot:
+        await load_extensions()
+        await bot.start(TOKEN)
+
+asyncio.run(main())
