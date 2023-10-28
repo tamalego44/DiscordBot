@@ -12,7 +12,7 @@ class MusicCog(commands.Cog):
         self.client = client
         self.queues = {}
         self.valid_filetypes = ["mp3"]
-        self.timeout = 600
+        self.timeout = 300
     
     @commands.command(name="pause", help="This command pauses the current song. Resume playing with !resume")
     async def pause(self, ctx: commands.Context):

@@ -9,7 +9,6 @@ import yt_dlp as youtube_dl
 - Make all user feedback more uniform
 - Improve help messages
 - Add help info to bot profile
-- Have habiba remove herself from queue when appropriate https://stackoverflow.com/questions/63658589/how-to-make-a-discord-bot-leave-the-voice-channel-after-being-inactive-for-x-min
 - Refine queue output (by whom and song duration)
 - Expand valid filetypes
 - Gambling...
