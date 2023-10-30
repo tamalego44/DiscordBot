@@ -52,7 +52,7 @@ class MusicCog(commands.Cog):
     async def play(self, ctx: commands.Context, index: int = -1):
         try:
             await self.join(ctx)
-            rec = db.get(str(ctx.message.guild.id), index)
+            rec = db.get_song(str(ctx.message.guild.id), index)
             await self.playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=rec[1]), "TEMP VALUE", rec[1])
         except Exception:
             print(traceback.format_exc())
@@ -147,7 +147,7 @@ class MusicCog(commands.Cog):
 
         song_obj = Song(ctx, source, name, filename)
 
-        db.insert(str(server.id), song_obj)
+        db.insert_song(str(server.id), song_obj)
 
         if voice_channel.is_playing():
             if server.id not in self.queues:
