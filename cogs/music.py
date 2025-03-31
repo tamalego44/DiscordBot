@@ -116,7 +116,9 @@ class MusicCog(commands.Cog):
             voice_client.stop()
 
     @commands.command(name='play', help="This command plays a file")
-    async def play(self, ctx: commands.Context, url: str = None):
+    async def play(self, ctx: commands.Context, *args):
+        url = ' '.join(args)
+
         try:
             if not await self.join(ctx):
                 return False
