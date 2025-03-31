@@ -12,7 +12,7 @@ class MusicCog(commands.Cog):
         self.client = client
         self.queues = {}
         self.valid_filetypes = ["mp3"]
-        self.timeout = 300
+        self.timeout = 60 * 5
     
     @commands.command(name="pause", help="This command pauses the current song. Resume playing with !resume")
     async def pause(self, ctx: commands.Context):
@@ -49,11 +49,23 @@ class MusicCog(commands.Cog):
         await ctx.send("this function is not yet supported")
 
     @commands.command(name='replay', help="Replay a previous song")
-    async def play(self, ctx: commands.Context, index: int = -1):
+    async def replay(self, ctx: commands.Context, index: int = 1):
         try:
             await self.join(ctx)
-            rec = db.get_song(str(ctx.message.guild.id), index)
-            await self.playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=rec[1]), "TEMP VALUE", rec[1])
+            rec = db.get_songs(str(ctx.message.guild.id))[-index]
+            await self.playsong(ctx, discord.FFmpegPCMAudio(executable="ffmpeg", source=rec[1]), rec[3], rec[1])
+        except Exception:
+            print(traceback.format_exc())
+            await ctx.send("Something went wrong. Notify <@186322107783839746>")
+
+    @commands.command(name='history', help="Display recently played songs")
+    async def history(self, ctx: commands.Context, count: int = 5):
+        try:
+            songs = db.get_songs(str(ctx.message.guild.id))
+            ret = "Last %d played songs:\n" % min(count, len(songs))
+            for i, song in enumerate(songs[:-count-1:-1], start=1):
+                ret += "%d - %s\n" % (i, song[3])
+            await ctx.send(ret)
         except Exception:
             print(traceback.format_exc())
             await ctx.send("Something went wrong. Notify <@186322107783839746>")

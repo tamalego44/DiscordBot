@@ -19,11 +19,11 @@ def insert_song(server, song_obj: Song):
     cur.execute("INSERT INTO history VALUES(?, ?, ?, ?, ?)", data)
     con.commit()
 
-def get_song(server, index=-1):
+def get_songs(server):
     cur = con.cursor()
     data = [server]
     data = cur.execute("SELECT * from history WHERE server=? ORDER BY time ASC", data)
-    return data.fetchall()[index]
+    return data.fetchall()
 
 def add_money(user, amt):
     cur = con.cursor()

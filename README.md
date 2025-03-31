@@ -15,6 +15,7 @@ import yt_dlp as youtube_dl
 - Logging https://discordpy.readthedocs.io/en/latest/logging.html
 
 ## Bug List
+
 - Variable Bit-Rate mp3s are not handled properly by ffmpeg
     - https://stackoverflow.com/questions/10437750/how-to-get-the-real-actual-duration-of-an-mp3-file-vbr-or-cbr-server-side
     - [mp3 @ 0x1e07900] Estimating duration from bitrate, this may be inaccurate
